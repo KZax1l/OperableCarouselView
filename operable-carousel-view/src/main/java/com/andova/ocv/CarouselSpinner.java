@@ -339,7 +339,7 @@ abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
         if (fitting.size() != 0) {
             selectedPosition = fitting.get(fitting.size() - 1).getIndex();
         } else {
-            selectedPosition = mSelectedPosition;
+            selectedPosition = INVALID_POSITION;
         }
 
         return selectedPosition;

@@ -55,6 +55,7 @@ public final class CarouselOptions {
      */
     private int mSelectedItem = CarouselConfigInfo.DEFAULT_SELECTED_ITEM;
     private float mTilt = CarouselConfigInfo.TILT;
+    private int mDiameter = CarouselConfigInfo.OCV_CONFIG_PARAMS_DIAMETER;
 
     /**
      * Creates a new {@link CarouselOptions} object.
@@ -162,8 +163,19 @@ public final class CarouselOptions {
         return this;
     }
 
+    /**
+     * 倾斜度配置项
+     */
     public CarouselOptions tilt(float tilt) {
         mTilt = tilt;
+        return this;
+    }
+
+    /**
+     * 直径配置项
+     */
+    public CarouselOptions diameter(int diameter) {
+        mDiameter = diameter;
         return this;
     }
 
@@ -229,6 +241,10 @@ public final class CarouselOptions {
         return mTilt;
     }
 
+    int getDiameter() {
+        return mDiameter;
+    }
+
 
     /* ************************************************************************* */
     /* ***************************** Utility API ******************************* */
@@ -265,11 +281,10 @@ public final class CarouselOptions {
     }
 
     private int getScrollingDistanceCoefficient(Context context) {
-        int result = 0;
+        int result;
 
         switch (context.getResources().getDisplayMetrics().densityDpi) {
             case DisplayMetrics.DENSITY_LOW:
-                result = 0;
             case DisplayMetrics.DENSITY_MEDIUM:
                 result = 0;
                 break;

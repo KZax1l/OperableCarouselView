@@ -1,12 +1,13 @@
 package com.andova.ocv.sample;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.andova.ocv.CarouselOptions;
 import com.andova.ocv.CarouselView;
@@ -14,7 +15,7 @@ import com.andova.ocv.CarouselView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity implements CarouselView.CarouselScrollListener {
     private CarouselView mCarouselView;
 
     @Override
@@ -23,8 +24,10 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
         mCarouselView = (CarouselView) findViewById(R.id.carouselView);
+        mCarouselView.setCarouselScrollListener(this);
         CarouselOptions options = new CarouselOptions();
         options.tilt(-0.6f);
+        options.diameter(500);
         mCarouselView.carouselOptions(options);
         for (View stubItem : initStubItems()) {
             mCarouselView.addView(stubItem);
@@ -74,5 +77,15 @@ public class MainActivity extends Activity {
         ((ImageView) view.findViewById(R.id.iv_icon)).setImageResource(icon);
         ((TextView) view.findViewById(R.id.tv_name)).setText(name);
         return view;
+    }
+
+    @Override
+    public void onPositionChanged(int position) {
+        Toast.makeText(this, "滑动到了第" + position + "项", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPositionClicked(int position) {
+        Toast.makeText(this, "点击了第" + position + "项", Toast.LENGTH_SHORT).show();
     }
 }

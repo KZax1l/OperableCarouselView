@@ -502,12 +502,8 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
          */
         // detachAllViewsFromParent();
 
-        mCarouselDiameter = getMeasuredWidth();
-
         CarouselItemHolder child = (CarouselItemHolder) getAdapter().getView(0, null, null);
-
-        if (child.getWidth() > 0)
-            mCarouselDiameter = Math.min(getMeasuredWidth(), child.getWidth() * 2);
+        layoutDiameter(child);
 
         int count = getAdapter().getCount();
         float angleUnit = 360.0f / count;
@@ -537,6 +533,16 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
         mNeedSync = false;
 
         updateSelectedItemMetadata();
+    }
+
+    private void layoutDiameter(CarouselItemHolder child) {
+        if (mCarouselOptions.getDiameter() > 0) {
+            mCarouselDiameter = mCarouselOptions.getDiameter();
+            return;
+        }
+        mCarouselDiameter = getMeasuredWidth();
+        if (child.getWidth() > 0)
+            mCarouselDiameter = Math.min(getMeasuredWidth(), child.getWidth() * 2);
     }
 
     /**

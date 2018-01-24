@@ -1,5 +1,6 @@
 package com.andova.ocv.sample;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
@@ -76,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements CarouselView.Caro
         ((ImageView) view.findViewById(R.id.iv_icon)).setImageResource(icon);
         ((TextView) view.findViewById(R.id.tv_name)).setText(name);
         return view;
+    }
+
+    public void nextPage(View view) {
+        startActivity(new Intent(this, NextActivity.class));
+        finish();
     }
 
     @Override

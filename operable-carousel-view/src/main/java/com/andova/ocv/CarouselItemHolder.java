@@ -3,7 +3,7 @@ package com.andova.ocv;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.os.Build;
-import android.view.LayoutInflater;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -36,9 +36,14 @@ class CarouselItemHolder extends FrameLayout implements Comparable<CarouselItemH
     private static final LayoutParams CHILD_PARAMS = new LayoutParams(
             LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 
+    @SuppressWarnings("unused")
+    private CarouselItemHolder(Context context) {
+        super(context);
+    }
+
     CarouselItemHolder(Context context, View childView) {
         super(context);
-        initWidget(context, childView);
+        initWidget(childView);
     }
 
     @Override
@@ -63,7 +68,7 @@ class CarouselItemHolder extends FrameLayout implements Comparable<CarouselItemH
     /* ******************************************************************** */
 
     @Override
-    public int compareTo(CarouselItemHolder another) {
+    public int compareTo(@NonNull CarouselItemHolder another) {
         return (int) (another.getItemZ() - mItemZ);
     }
 
@@ -165,15 +170,11 @@ class CarouselItemHolder extends FrameLayout implements Comparable<CarouselItemH
         }
     }
 
-    private void initWidget(Context context, View childView) {
+    private void initWidget(View childView) {
         mContentView = childView;
         final LayoutParams params = new LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         this.setLayoutParams(params);
-
-        final LayoutInflater inflater = LayoutInflater.from(context);
-        final View view = inflater.inflate(R.layout.carousel_item_holder, this, true);
-        final FrameLayout container = (FrameLayout) view.findViewById(R.id.carousel_item_container);
-        container.addView(childView, CHILD_PARAMS);
+        this.addView(childView, CHILD_PARAMS);
     }
 }

@@ -30,6 +30,7 @@ class CarouselConfigInfo {
 
     /**
      * Tilt angle, negative lifts up back, positive lowers back.
+     * <p>倾斜角度</p>
      */
     static float TILT = -0.3f;
 

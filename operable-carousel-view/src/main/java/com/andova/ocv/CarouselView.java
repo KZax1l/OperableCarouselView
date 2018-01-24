@@ -23,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static com.andova.ocv.OCVDiameterEnum.OCV_DIAMETER_ENUM_FULL;
+import static com.andova.ocv.OCVDiameterEnum.OCV_DIAMETER_ENUM_WRAP;
+
 /**
  * Implements {@link CarouselSpinner}.
  *
@@ -540,9 +543,17 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
             mCarouselDiameter = mCarouselOptions.getDiameter();
             return;
         }
-        mCarouselDiameter = getMeasuredWidth();
-        if (child.getWidth() > 0)
-            mCarouselDiameter = Math.min(getMeasuredWidth(), child.getWidth() * 2);
+        switch (mCarouselOptions.getDiameter()) {
+            case OCV_DIAMETER_ENUM_FULL:
+                mCarouselDiameter = getMeasuredWidth() - child.getWidth() * 2;
+                break;
+            case OCV_DIAMETER_ENUM_WRAP:
+            default:
+                mCarouselDiameter = getMeasuredWidth();
+                if (child.getWidth() > 0)
+                    mCarouselDiameter = Math.min(getMeasuredWidth(), child.getWidth() * 2);
+                break;
+        }
     }
 
     /**

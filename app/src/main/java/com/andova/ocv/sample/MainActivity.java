@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements CarouselView.Caro
         mCarouselView.setCarouselScrollListener(this);
         CarouselOptions options = new CarouselOptions();
         options.tilt(-0.6f);
-        options.diameter(500);
         mCarouselView.carouselOptions(options);
         for (View stubItem : initStubItems()) {
             mCarouselView.addView(stubItem);

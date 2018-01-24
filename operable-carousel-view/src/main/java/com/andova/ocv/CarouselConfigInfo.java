@@ -6,7 +6,6 @@ package com.andova.ocv;
  * @author Carousel view
  */
 class CarouselConfigInfo {
-
     /**
      * Default min quantity of views.
      */
@@ -84,5 +83,4 @@ class CarouselConfigInfo {
      * Configures vertical shift of non-front items.
      */
     static final float CAROUSEL_ITEM_Y_POSITION = 1.0f;
-    static final int OCV_CONFIG_PARAMS_DIAMETER = -1;
 }

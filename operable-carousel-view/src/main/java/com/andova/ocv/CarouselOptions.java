@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 
+import static com.andova.ocv.OCVDiameterEnum.OCV_DIAMETER_ENUM_FULL;
+
 /**
  * Defines configuration {@link CarouselOptions} for a {@link CarouselView}.
  * These options can be used when adding a carousel view to your application
@@ -55,7 +57,7 @@ public final class CarouselOptions {
      */
     private int mSelectedItem = CarouselConfigInfo.DEFAULT_SELECTED_ITEM;
     private float mTilt = CarouselConfigInfo.TILT;
-    private int mDiameter = CarouselConfigInfo.OCV_CONFIG_PARAMS_DIAMETER;
+    private int mDiameter = OCV_DIAMETER_ENUM_FULL;
 
     /**
      * Creates a new {@link CarouselOptions} object.

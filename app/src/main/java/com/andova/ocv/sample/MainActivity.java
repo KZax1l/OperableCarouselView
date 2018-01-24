@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.andova.ocv.CarouselOptions;
 import com.andova.ocv.CarouselView;
 
 import java.util.ArrayList;
@@ -22,6 +23,9 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
         mCarouselView = (CarouselView) findViewById(R.id.carouselView);
+        CarouselOptions options = new CarouselOptions();
+        options.tilt(-0.6f);
+        mCarouselView.carouselOptions(options);
         for (View stubItem : initStubItems()) {
             mCarouselView.addView(stubItem);
         }

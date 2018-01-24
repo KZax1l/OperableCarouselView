@@ -607,6 +607,11 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
         invalidate();
     }
 
+    public void carouselOptions(CarouselOptions options) {
+        mCarouselOptions = options;
+        refresh();
+    }
+
     private void onUp() {
         if (mFlingRunnable.mRotator.isFinished()) {
             scrollIntoSlots();
@@ -901,7 +906,7 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
         int dpi = getResources().getDisplayMetrics().densityDpi;
         float dpiScale = (float) dpi / DisplayMetrics.DENSITY_HIGH;
         return new ViewCoefficientHolder(0.0f, CarouselConfigInfo.DIAMETER_SCALE * dpiScale,
-                CarouselConfigInfo.TILT);
+                mCarouselOptions.getTilt());
     }
 
     private boolean dispatchLongPress(View view, int position, long id) {

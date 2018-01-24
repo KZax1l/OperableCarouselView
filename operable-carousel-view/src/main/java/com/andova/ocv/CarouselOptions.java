@@ -54,6 +54,7 @@ public final class CarouselOptions {
      * Holds default selected item.
      */
     private int mSelectedItem = CarouselConfigInfo.DEFAULT_SELECTED_ITEM;
+    private float mTilt = CarouselConfigInfo.TILT;
 
     /**
      * Creates a new {@link CarouselOptions} object.
@@ -161,6 +162,11 @@ public final class CarouselOptions {
         return this;
     }
 
+    public CarouselOptions tilt(float tilt) {
+        mTilt = tilt;
+        return this;
+    }
+
     /**
      * @return max quantity for carousel view
      */
@@ -217,6 +223,10 @@ public final class CarouselOptions {
      */
     int getSelectedItem() {
         return mSelectedItem;
+    }
+
+    float getTilt() {
+        return mTilt;
     }
 
 

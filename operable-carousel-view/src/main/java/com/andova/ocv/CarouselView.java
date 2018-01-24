@@ -429,7 +429,7 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
 
     @Override
     protected boolean checkLayoutParams(LayoutParams p) {
-        return p instanceof LayoutParams;
+        return p != null;
     }
 
     /**
@@ -673,7 +673,7 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
             int position = item.getIndex();
             setSelectedPositionInt(position);
             if (null != mCarouselScrollListener) {
-                mCarouselScrollListener.onPositionChanged(position);
+                mCarouselScrollListener.onPositionChanged(position, item.getContentView());
             }
             onFinishedMovement();
         }
@@ -976,7 +976,8 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
 
     private void onCarouselItemClick() {
         if (null != mCarouselScrollListener) {
-            mCarouselScrollListener.onPositionClicked(mDownTouchPosition);
+            mCarouselScrollListener.onPositionClicked(mDownTouchPosition,
+                    mCarouselItems.get(mDownTouchPosition).getContentView());
         }
         mCarouselItems.get(mDownTouchPosition).getOnItemClickListener().onClick(getSelectedView());
         mIsSingleTapUp = false;
@@ -1269,13 +1270,13 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
          *
          * @param position selected position
          */
-        void onPositionChanged(int position);
+        void onPositionChanged(int position, View view);
 
         /**
          * Notify when carousel position has been clicked to navigate away.
          *
          * @param position selected position
          */
-        void onPositionClicked(int position);
+        void onPositionClicked(int position, View view);
     }
 }

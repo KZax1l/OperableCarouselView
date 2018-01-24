@@ -79,12 +79,16 @@ public class MainActivity extends AppCompatActivity implements CarouselView.Caro
     }
 
     @Override
-    public void onPositionChanged(int position) {
-        Toast.makeText(this, "滑动到了第" + position + "项", Toast.LENGTH_SHORT).show();
+    public void onPositionChanged(int position, View view) {
+        Toast.makeText(this, "滑动到了第" + position + "项，文字信息为："
+                        + ((TextView) view.findViewById(R.id.tv_name)).getText(),
+                Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onPositionClicked(int position) {
-        Toast.makeText(this, "点击了第" + position + "项", Toast.LENGTH_SHORT).show();
+    public void onPositionClicked(int position, View view) {
+        Toast.makeText(this, "点击了第" + position + "项，文字信息为："
+                        + ((TextView) view.findViewById(R.id.tv_name)).getText(),
+                Toast.LENGTH_SHORT).show();
     }
 }

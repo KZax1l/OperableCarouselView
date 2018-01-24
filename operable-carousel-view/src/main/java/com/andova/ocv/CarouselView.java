@@ -154,7 +154,7 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
             mGestureDetector.onTouchEvent(event);
         }
 
-        restoreGestureDetectorState(event);
+        if (getSelectedItemPosition() != mDownTouchPosition) restoreGestureDetectorState(event);
 
         invalidateChildren();
         if (getSelectedItemPosition() == mDownTouchPosition) {

@@ -630,6 +630,7 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
     }
 
     private void onUp() {
+        if (mDownTouchPosition == INVALID_POSITION) return;
         if (mFlingRunnable.mRotator.isFinished()) {
             scrollIntoSlots();
         }

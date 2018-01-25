@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -773,21 +774,38 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
         Paint paint = new Paint();
         paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setAntiAlias(true);
+
+        float left = 0, right = 0, top = 0, bottom = 0;
+
         for (CarouselItemHolder item : mCarouselItems) {
             float scale = item.getItemScale();
-            float scaleXOff = item.getWidth() / 2.0f * (1.0f - scale);
-
             float centerX = (float) getWidth() / 2;
+            float scaleXOff = item.getWidth() / 2.0f * (1.0f - scale);
             scaleXOff += (item.getItemX() + item.getWidth() / 2 - centerX)
                     * mViewCoefficientHolder.mDiameterScale;
-//            canvas.drawPoint(item.getItemX()+scaleXOff,item.getItemY(),paint);
-            canvas.drawRect(item.getItemX() + scaleXOff, item.getItemY(),
-                    item.getItemX() + scaleXOff + item.getWidth() * item.getItemScale(),
-                    item.getItemY() + item.getHeight() * item.getItemScale(),
-                    paint);
+
+            float l = item.getItemX() + scaleXOff;
+            float t = item.getItemY();
+            float r = item.getItemX() + scaleXOff + item.getWidth() * item.getItemScale();
+            float b = item.getItemY() + item.getHeight() * item.getItemScale();
+            canvas.drawRect(l, t, r, b, paint);
+
+            l += item.getWidth() * item.getItemScale() / 2;
+            t += item.getHeight() * item.getItemScale() / 2;
+            r -= item.getWidth() * item.getItemScale() / 2;
+            b -= item.getHeight() * item.getItemScale() / 2;
+            if (l < left || left == 0) left = l;
+            if (t < top || top == 0) top = t;
+            if (r > right || right == 0) right = r;
+            if (b > bottom || bottom == 0) bottom = b;
         }
+
+        canvas.drawOval(new RectF(left, top, right, bottom), paint);
     }
 
     /**

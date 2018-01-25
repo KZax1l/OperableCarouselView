@@ -3,6 +3,7 @@ package com.andova.ocv;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -767,6 +768,26 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
         mRecycler.clear();
 
         invalidate();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        for (CarouselItemHolder item : mCarouselItems) {
+            float scale = item.getItemScale();
+            float scaleXOff = item.getWidth() / 2.0f * (1.0f - scale);
+
+            float centerX = (float) getWidth() / 2;
+            scaleXOff += (item.getItemX() + item.getWidth() / 2 - centerX)
+                    * mViewCoefficientHolder.mDiameterScale;
+//            canvas.drawPoint(item.getItemX()+scaleXOff,item.getItemY(),paint);
+            canvas.drawRect(item.getItemX() + scaleXOff, item.getItemY(),
+                    item.getItemX() + scaleXOff + item.getWidth() * item.getItemScale(),
+                    item.getItemY() + item.getHeight() * item.getItemScale(),
+                    paint);
+        }
     }
 
     /**

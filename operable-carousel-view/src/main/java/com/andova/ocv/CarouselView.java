@@ -780,32 +780,55 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
         paint.setStyle(Paint.Style.STROKE);
         paint.setAntiAlias(true);
 
+        canvas.drawOval(ovalRect(mCarouselItems), paint);
+    }
+
+    /**
+     * @return 子控件当前横坐标据{@link CarouselItemHolder#getItemX()}的偏移量
+     */
+    private float scaleXOffset(CarouselItemHolder child) {
+        float scale = child.getItemScale();
+        float centerX = (float) getWidth() / 2;
+        float scaleXOff = child.getWidth() / 2.0f * (1.0f - scale);
+        scaleXOff += (child.getItemX() + child.getWidth() / 2 - centerX)
+                * mViewCoefficientHolder.mDiameterScale;
+        return scaleXOff;
+    }
+
+    /**
+     * @return 子控件的绘制区域
+     */
+    private RectF contentRect(CarouselItemHolder child) {
+        float scaleXOff = scaleXOffset(child);
+        float l = child.getItemX() + scaleXOff;
+        float t = child.getItemY();
+        float r = child.getItemX() + scaleXOff + child.getWidth() * child.getItemScale();
+        float b = child.getItemY() + child.getHeight() * child.getItemScale();
+        return new RectF(l, t, r, b);
+    }
+
+    /**
+     * @return 所有子控件包围住的内部椭圆区域
+     */
+    private RectF ovalRect(List<CarouselItemHolder> children) {
         float left = 0, right = 0, top = 0, bottom = 0;
+        for (CarouselItemHolder child : children) {
+            RectF content = contentRect(child);
+            float l = content.left;
+            float t = content.top;
+            float r = content.right;
+            float b = content.bottom;
 
-        for (CarouselItemHolder item : mCarouselItems) {
-            float scale = item.getItemScale();
-            float centerX = (float) getWidth() / 2;
-            float scaleXOff = item.getWidth() / 2.0f * (1.0f - scale);
-            scaleXOff += (item.getItemX() + item.getWidth() / 2 - centerX)
-                    * mViewCoefficientHolder.mDiameterScale;
-
-            float l = item.getItemX() + scaleXOff;
-            float t = item.getItemY();
-            float r = item.getItemX() + scaleXOff + item.getWidth() * item.getItemScale();
-            float b = item.getItemY() + item.getHeight() * item.getItemScale();
-            canvas.drawRect(l, t, r, b, paint);
-
-            l += item.getWidth() * item.getItemScale() / 2;
-            t += item.getHeight() * item.getItemScale() / 2;
-            r -= item.getWidth() * item.getItemScale() / 2;
-            b -= item.getHeight() * item.getItemScale() / 2;
+            l += child.getWidth() * child.getItemScale() / 2;
+            t += child.getHeight() * child.getItemScale() / 2;
+            r -= child.getWidth() * child.getItemScale() / 2;
+            b -= child.getHeight() * child.getItemScale() / 2;
             if (l < left || left == 0) left = l;
             if (t < top || top == 0) top = t;
             if (r > right || right == 0) right = r;
             if (b > bottom || bottom == 0) bottom = b;
         }
-
-        canvas.drawOval(new RectF(left, top, right, bottom), paint);
+        return new RectF(left, top, right, bottom);
     }
 
     /**

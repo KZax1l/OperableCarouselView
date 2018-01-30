@@ -435,6 +435,16 @@ abstract class CarouselAdapter<T extends Adapter> extends ViewGroup {
     abstract View getSelectedView();
 
     /**
+     * 替代{@link ViewGroup#getChildCount()}
+     */
+    abstract int getCarouselCount();
+
+    /**
+     * 替代{@link ViewGroup#getChildAt(int)}
+     */
+    abstract View getCarouselAt(int position);
+
+    /**
      * Get the position within the adapter's data set for the view, where view
      * is a an adapter item or a descendant of an adapter item.
      *
@@ -457,9 +467,9 @@ abstract class CarouselAdapter<T extends Adapter> extends ViewGroup {
         }
 
         // Search the children for the list item
-        final int childCount = getChildCount();
+        final int childCount = getCarouselCount();
         for (int i = 0; i < childCount; i++) {
-            if (getChildAt(i).equals(listItem)) {
+            if (getCarouselAt(i).equals(listItem)) {
                 return mFirstPosition + i;
             }
         }
@@ -485,7 +495,7 @@ abstract class CarouselAdapter<T extends Adapter> extends ViewGroup {
      * @return The position within the adapter's data set
      */
     int getLastVisiblePosition() {
-        return mFirstPosition + getChildCount() - 1;
+        return mFirstPosition + getCarouselCount() - 1;
     }
 
     void checkFocus() {
@@ -753,12 +763,12 @@ abstract class CarouselAdapter<T extends Adapter> extends ViewGroup {
      * changed.
      */
     void rememberSyncState() {
-        if (getChildCount() > 0) {
+        if (getCarouselCount() > 0) {
             mNeedSync = true;
             mSyncHeight = mLayoutHeight;
             if (mSelectedPosition >= 0) {
                 // Sync the selection state
-                View v = getChildAt(mSelectedPosition - mFirstPosition);
+                View v = getCarouselAt(mSelectedPosition - mFirstPosition);
                 mSyncRowId = mNextSelectedRowId;
                 mSyncPosition = mNextSelectedPosition;
                 if (v != null) {
@@ -767,7 +777,7 @@ abstract class CarouselAdapter<T extends Adapter> extends ViewGroup {
                 mSyncMode = SYNC_SELECTED_POSITION;
             } else {
                 // Sync the based on the offset of the first view
-                View v = getChildAt(0);
+                View v = getCarouselAt(0);
                 T adapter = getAdapter();
                 if (mFirstPosition >= 0 && mFirstPosition < adapter.getCount()) {
                     mSyncRowId = adapter.getItemId(mFirstPosition);

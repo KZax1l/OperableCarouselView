@@ -246,7 +246,7 @@ abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
     View getSelectedView() {
         View selectedView = null;
         if (mItemCount > 0 && mSelectedPosition >= 0) {
-            selectedView = getChildAt(mSelectedPosition - mFirstPosition);
+            selectedView = getCarouselAt(mSelectedPosition - mFirstPosition);
         }
 
         return selectedView;
@@ -311,13 +311,13 @@ abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
     }
 
     void recycleAllViews() {
-        final int childCount = getChildCount();
+        final int childCount = getCarouselCount();
         final RecycleBin recycleBin = mRecycler;
         final int position = mFirstPosition;
 
         // All views go in recycler
         for (int i = 0; i < childCount; i++) {
-            View v = getChildAt(i);
+            View v = getCarouselAt(i);
             int index = position + i;
             recycleBin.put(index, v);
         }
@@ -358,7 +358,7 @@ abstract class CarouselSpinner extends CarouselAdapter<SpinnerAdapter> {
 
         for (int i = 0; i < mAdapter.getCount(); i++) {
 
-            CarouselItemHolder item = (CarouselItemHolder) getChildAt(i);
+            CarouselItemHolder item = (CarouselItemHolder) getCarouselAt(i);
 
             Matrix mm = null;
             if ((null == item) || (null == (mm = item.getCIMatrix()))) {

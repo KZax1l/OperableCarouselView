@@ -521,6 +521,13 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
                 angle = 360.0f + angle;
             makeAndAddView(i, angle);
         }
+        for (IOCVCarouselPlugin plugin : mCarouselOptions.getPlugins()) {
+            boolean isLayout = plugin.layout(this, mCarouselItems);
+            if (!plugin.addViewInLayout()) continue;
+            for (View view : plugin.extraView()) {
+                addViewInLayout(view, -1, generateDefaultLayoutParams());
+            }
+        }
 
         /*
          * FIXME: IN GENERAL IT DOESN'T MAKE SENCE IF detachAllViewsFromParent() IS COMMENTED.

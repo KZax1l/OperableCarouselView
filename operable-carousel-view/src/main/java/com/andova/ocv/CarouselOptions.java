@@ -58,6 +58,7 @@ public final class CarouselOptions {
     private int mSelectedItem = CarouselConfigInfo.DEFAULT_SELECTED_ITEM;
     private float mTilt = CarouselConfigInfo.TILT;
     private int mDiameter = OCV_DIAMETER_ENUM_FULL;
+    private IOCVCarouselPlugin[] mPlugins;
 
     /**
      * Creates a new {@link CarouselOptions} object.
@@ -181,6 +182,11 @@ public final class CarouselOptions {
         return this;
     }
 
+    public CarouselOptions plugins(IOCVCarouselPlugin[] plugins) {
+        mPlugins = plugins;
+        return this;
+    }
+
     /**
      * @return max quantity for carousel view
      */
@@ -245,6 +251,10 @@ public final class CarouselOptions {
 
     int getDiameter() {
         return mDiameter;
+    }
+
+    IOCVCarouselPlugin[] getPlugins() {
+        return mPlugins;
     }
 
 

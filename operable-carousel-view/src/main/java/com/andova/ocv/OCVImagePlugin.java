@@ -1,9 +1,9 @@
 package com.andova.ocv;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -17,12 +17,15 @@ import java.util.List;
  * @since 1.0.0
  */
 public class OCVImagePlugin implements IOCVCarouselPlugin {
+    private RectF mRect;
     private View[] vTest;
 
     @Override
     public void measureAndLayoutChild(ViewGroup parent, List<CarouselItemHolder> items, View child) {
-        child.measure(child.getMeasuredWidth(), child.getMeasuredHeight());
-        child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
+        child.measure((int) (mRect.right - mRect.left), (int) (mRect.bottom - mRect.top));
+        child.layout((int) mRect.left, (int) mRect.top, (int) mRect.right, (int) mRect.bottom);
+        System.out.println("measureWidth:" + child.getMeasuredWidth() + ",measureHeight:"
+                + child.getMeasuredHeight() + ",width:" + child.getWidth() + ",height:" + child.getHeight());
     }
 
     @Override
@@ -31,13 +34,15 @@ public class OCVImagePlugin implements IOCVCarouselPlugin {
     }
 
     @Override
-    public View[] extraView(Context context) {
+    public View[] extraView(ViewGroup parent, List<CarouselItemHolder> items) {
+        mRect = ovalRect(parent, items);
         if (vTest != null) return vTest;
-        TextView textView = new TextView(context);
+        TextView textView = new TextView(parent.getContext());
         textView.setText("TEST_TEXT");
         textView.setTextSize(32f);
-        textView.setBackgroundColor(Color.BLUE);
+        textView.setGravity(Gravity.CENTER);
         textView.setTextColor(Color.GREEN);
+        textView.setBackgroundColor(Color.BLUE);
         vTest = new View[]{textView};
         return vTest;
     }

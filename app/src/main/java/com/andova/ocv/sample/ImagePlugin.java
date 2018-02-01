@@ -18,12 +18,12 @@ import java.util.List;
  * @author kzaxil
  * @since 1.0.0
  */
-class OCVImagePlugin implements IOCVCarouselPlugin {
+class ImagePlugin implements IOCVCarouselPlugin {
     private RectF mRect;
     private View[] vTest;
     private CarouselOptions mOptions;
 
-    OCVImagePlugin(CarouselOptions options) {
+    ImagePlugin(CarouselOptions options) {
         mOptions = options;
     }
 

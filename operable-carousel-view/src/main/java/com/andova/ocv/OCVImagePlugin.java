@@ -20,8 +20,9 @@ public class OCVImagePlugin implements IOCVCarouselPlugin {
     private View[] vTest;
 
     @Override
-    public boolean layout(ViewGroup parent, List<CarouselItemHolder> items) {
-        return false;
+    public void measureAndLayoutChild(ViewGroup parent, List<CarouselItemHolder> items, View child) {
+        child.measure(child.getMeasuredWidth(), child.getMeasuredHeight());
+        child.layout(0, 0, child.getMeasuredWidth(), child.getMeasuredHeight());
     }
 
     @Override

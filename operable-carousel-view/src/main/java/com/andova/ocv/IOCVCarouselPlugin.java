@@ -13,7 +13,7 @@ import java.util.List;
  * @since 1.0.0
  */
 public interface IOCVCarouselPlugin {
-    boolean layout(ViewGroup parent, List<CarouselItemHolder> items);
+    void measureAndLayoutChild(ViewGroup parent, List<CarouselItemHolder> items, View child);
 
     boolean addViewInLayout();
 

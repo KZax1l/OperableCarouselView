@@ -523,14 +523,12 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
             makeAndAddView(i, angle);
         }
         for (IOCVCarouselPlugin plugin : mCarouselOptions.getPlugins()) {
-            boolean isLayout = plugin.layout(this, mCarouselItems);
             if (!plugin.addViewInLayout()) continue;
             for (View view : plugin.extraView(getContext())) {
-                if (view.getParent() == null)
+                if (view.getParent() == null) {
                     addViewInLayout(view, -1, generateDefaultLayoutParams());
-                System.out.println("width:" + view.getMeasuredWidth() + ",height:" + view.getMeasuredHeight());
-                view.measure(view.getMeasuredWidth(), view.getMeasuredHeight());
-                view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+                }
+                plugin.measureAndLayoutChild(this, mCarouselItems, view);
             }
         }
 

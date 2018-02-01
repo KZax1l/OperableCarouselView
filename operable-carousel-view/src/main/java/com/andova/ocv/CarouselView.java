@@ -439,6 +439,7 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
      */
     @Override
     protected int getChildDrawingOrder(int childCount, int i) {
+        if (!(getChildAt(i) instanceof CarouselItemHolder)) return i;
         // Sort Carousel items by z coordinate in reverse order
         ArrayList<CarouselItemHolder> sl = new ArrayList<CarouselItemHolder>();
         for (int j = 0; j < getCarouselCount(); j++) {

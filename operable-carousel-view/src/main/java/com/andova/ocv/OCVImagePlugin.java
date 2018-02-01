@@ -1,12 +1,10 @@
 package com.andova.ocv;
 
-import android.graphics.Color;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
-import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -37,13 +35,8 @@ public class OCVImagePlugin implements IOCVCarouselPlugin {
     public View[] extraView(ViewGroup parent, List<CarouselItemHolder> items) {
         mRect = ovalRect(parent, items);
         if (vTest != null) return vTest;
-        TextView textView = new TextView(parent.getContext());
-        textView.setText("TEST_TEXT");
-        textView.setTextSize(32f);
-        textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(Color.GREEN);
-        textView.setBackgroundColor(Color.BLUE);
-        vTest = new View[]{textView};
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plugin_image_view, parent, false);
+        vTest = new View[]{view};
         return vTest;
     }
 

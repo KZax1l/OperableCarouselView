@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.andova.ocv.CarouselOptions;
 import com.andova.ocv.CarouselView;
+import com.andova.ocv.IOCVCarouselPlugin;
+import com.andova.ocv.OCVImagePlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements CarouselView.Caro
         mCarouselView.setCarouselScrollListener(this);
         CarouselOptions options = new CarouselOptions();
         options.tilt(-0.8f);
+        OCVImagePlugin plugin=new OCVImagePlugin();
+
+        options.plugins(new IOCVCarouselPlugin[]{plugin});
         mCarouselView.carouselOptions(options);
         for (View stubItem : initStubItems()) {
             mCarouselView.addView(stubItem);

@@ -1,9 +1,12 @@
 package com.andova.ocv;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -14,6 +17,8 @@ import java.util.List;
  * @since 1.0.0
  */
 public class OCVImagePlugin implements IOCVCarouselPlugin {
+    private View[] vTest;
+
     @Override
     public boolean layout(ViewGroup parent, List<CarouselItemHolder> items) {
         return false;
@@ -21,12 +26,19 @@ public class OCVImagePlugin implements IOCVCarouselPlugin {
 
     @Override
     public boolean addViewInLayout() {
-        return false;
+        return true;
     }
 
     @Override
-    public View[] extraView() {
-        return new View[0];
+    public View[] extraView(Context context) {
+        if (vTest != null) return vTest;
+        TextView textView = new TextView(context);
+        textView.setText("TEST_TEXT");
+        textView.setTextSize(32f);
+        textView.setBackgroundColor(Color.BLUE);
+        textView.setTextColor(Color.GREEN);
+        vTest = new View[]{textView};
+        return vTest;
     }
 
     /**

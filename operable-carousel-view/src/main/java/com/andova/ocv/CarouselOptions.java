@@ -58,7 +58,7 @@ public final class CarouselOptions {
     private int mSelectedItem = CarouselConfigInfo.DEFAULT_SELECTED_ITEM;
     private float mTilt = CarouselConfigInfo.TILT;
     private int mDiameter = OCV_DIAMETER_ENUM_FULL;
-    private IOCVCarouselPlugin[] mPlugins;
+    private IOCVCarouselPlugin[] mPlugins = new IOCVCarouselPlugin[0];
 
     /**
      * Creates a new {@link CarouselOptions} object.

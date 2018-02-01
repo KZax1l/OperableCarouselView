@@ -1,5 +1,6 @@
 package com.andova.ocv;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,5 +17,5 @@ public interface IOCVCarouselPlugin {
 
     boolean addViewInLayout();
 
-    View[] extraView();
+    View[] extraView(Context context);
 }

@@ -934,7 +934,7 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
     private ViewCoefficientHolder getViewCoefficient() {
         int dpi = getResources().getDisplayMetrics().densityDpi;
         float dpiScale = (float) dpi / DisplayMetrics.DENSITY_HIGH;
-        return new ViewCoefficientHolder(0.0f, CarouselConfigInfo.DIAMETER_SCALE * dpiScale,
+        return new ViewCoefficientHolder(0.0f, mCarouselOptions.getDiameterScale() * dpiScale,
                 mCarouselOptions.getTilt());
     }
 

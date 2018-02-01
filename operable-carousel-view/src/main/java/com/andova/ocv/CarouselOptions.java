@@ -59,6 +59,7 @@ public final class CarouselOptions {
     private float mTilt = CarouselConfigInfo.TILT;
     private int mDiameter = OCV_DIAMETER_ENUM_FULL;
     private IOCVCarouselPlugin[] mPlugins = new IOCVCarouselPlugin[0];
+    private float mDiameterScale = CarouselConfigInfo.DIAMETER_SCALE;
 
     /**
      * Creates a new {@link CarouselOptions} object.
@@ -187,38 +188,43 @@ public final class CarouselOptions {
         return this;
     }
 
+    public CarouselOptions diameterScale(int scale) {
+        mDiameterScale = scale;
+        return this;
+    }
+
     /**
      * @return max quantity for carousel view
      */
-    int getMaxQuantity() {
+    public int getMaxQuantity() {
         return mMaxQuantity;
     }
 
     /**
      * @return min quantity for carousel view
      */
-    int getMinQuantity() {
+    public int getMinQuantity() {
         return mMinQuantity;
     }
 
     /**
      * @return min alpha value for carousel items
      */
-    int getMinAlpha() {
+    public int getMinAlpha() {
         return mMinAlpha;
     }
 
     /**
      * @return max scrolling velocity for carousel view
      */
-    int getMaxScrollingVelocity() {
+    public int getMaxScrollingVelocity() {
         return mMaxScrollingVelocity;
     }
 
     /**
      * @return max scrolling distance for carousel view
      */
-    int getMaxScrollingDistance() {
+    public int getMaxScrollingDistance() {
         return mMaxScrollingDistance;
     }
 
@@ -227,36 +233,39 @@ public final class CarouselOptions {
      *
      * @return duration in milliseconds
      */
-    int getScrollToFlingUncetaintyTimeout() {
+    public int getScrollToFlingUncetaintyTimeout() {
         return mScrollToFlingUncertaintyTimeout;
     }
 
     /**
      * @return animation duration in milliseconds
      */
-    int getAnimationDuration() {
+    public int getAnimationDuration() {
         return mAnimationDuration;
     }
 
     /**
      * @return default selected item on carousel view
      */
-    int getSelectedItem() {
+    public int getSelectedItem() {
         return mSelectedItem;
     }
 
-    float getTilt() {
+    public float getTilt() {
         return mTilt;
     }
 
-    int getDiameter() {
+    public int getDiameter() {
         return mDiameter;
     }
 
-    IOCVCarouselPlugin[] getPlugins() {
+    public IOCVCarouselPlugin[] getPlugins() {
         return mPlugins;
     }
 
+    public float getDiameterScale() {
+        return mDiameterScale;
+    }
 
     /* ************************************************************************* */
     /* ***************************** Utility API ******************************* */

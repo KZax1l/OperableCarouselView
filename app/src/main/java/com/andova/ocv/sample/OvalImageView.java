@@ -1,4 +1,4 @@
-package com.andova.ocv;
+package com.andova.ocv.sample;
 
 import android.content.Context;
 import android.graphics.Bitmap;

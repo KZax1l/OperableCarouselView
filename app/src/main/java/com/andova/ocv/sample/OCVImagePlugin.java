@@ -1,10 +1,14 @@
-package com.andova.ocv;
+package com.andova.ocv.sample;
 
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.andova.ocv.CarouselItemHolder;
+import com.andova.ocv.CarouselOptions;
+import com.andova.ocv.IOCVCarouselPlugin;
 
 import java.util.List;
 
@@ -14,9 +18,14 @@ import java.util.List;
  * @author kzaxil
  * @since 1.0.0
  */
-public class OCVImagePlugin implements IOCVCarouselPlugin {
+class OCVImagePlugin implements IOCVCarouselPlugin {
     private RectF mRect;
     private View[] vTest;
+    private CarouselOptions mOptions;
+
+    OCVImagePlugin(CarouselOptions options) {
+        mOptions = options;
+    }
 
     @Override
     public void measureAndLayoutChild(ViewGroup parent, List<CarouselItemHolder> items, View child) {
@@ -50,7 +59,7 @@ public class OCVImagePlugin implements IOCVCarouselPlugin {
         int dpi = parent.getResources().getDisplayMetrics().densityDpi;
         float dpiScale = (float) dpi / DisplayMetrics.DENSITY_HIGH;
         scaleXOff += (child.getItemX() + child.getWidth() / 2 - centerX)
-                * CarouselConfigInfo.DIAMETER_SCALE * dpiScale;
+                * mOptions.getDiameterScale() * dpiScale;
         return scaleXOff;
     }
 

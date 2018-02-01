@@ -13,7 +13,7 @@ import android.widget.FrameLayout;
  *
  * @author Carousel view
  */
-class CarouselItemHolder extends FrameLayout implements Comparable<CarouselItemHolder> {
+public class CarouselItemHolder extends FrameLayout implements Comparable<CarouselItemHolder> {
 
     private int mIndex;
     private float mCurrentAngle;
@@ -96,31 +96,31 @@ class CarouselItemHolder extends FrameLayout implements Comparable<CarouselItemH
         mIsDispatchTouchEventEnable = isEnable;
     }
 
-    int getIndex() {
+    public int getIndex() {
         return mIndex;
     }
 
-    float getCurrentAngle() {
+    public float getCurrentAngle() {
         return mCurrentAngle;
     }
 
-    float getItemX() {
+    public float getItemX() {
         return mItemX;
     }
 
-    float getItemY() {
+    public float getItemY() {
         return mItemY;
     }
 
-    float getItemScale() {
+    public float getItemScale() {
         return mScale;
     }
 
-    void setItemZ(float z) {
+    public void setItemZ(float z) {
         mItemZ = z;
     }
 
-    float getItemZ() {
+    public float getItemZ() {
         return mItemZ;
     }
 

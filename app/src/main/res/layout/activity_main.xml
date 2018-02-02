@@ -14,11 +14,23 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white" />
 
-    <com.andova.ocv.CarouselView
-        android:id="@+id/carouselView"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:background="#cc000000"
-        android:layout_height="300dp" />
+        android:layout_height="300dp">
+
+        <ImageView
+            android:id="@+id/iv_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_image" />
+
+        <com.andova.ocv.CarouselView
+            android:id="@+id/carouselView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

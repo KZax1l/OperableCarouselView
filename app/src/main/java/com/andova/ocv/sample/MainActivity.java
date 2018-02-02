@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements CarouselView.Caro
         mCarouselView.setCarouselScrollListener(this);
         CarouselOptions options = new CarouselOptions();
         options.tilt(-0.8f);
-        ImagePlugin plugin = new ImagePlugin(options);
+        ImagePlugin plugin = new ImagePlugin(options, (ImageView) findViewById(R.id.iv_background));
 
         options.plugins(new IOCVCarouselPlugin[]{plugin});
         mCarouselView.carouselOptions(options);

@@ -17,4 +17,6 @@ public interface IOCVCarouselPlugin {
     boolean addViewInLayout();
 
     View[] extraView(ViewGroup parent, List<CarouselItemHolder> items);
+
+    void scroll(List<CarouselItemHolder> items);
 }

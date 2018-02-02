@@ -5,6 +5,7 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.andova.ocv.CarouselItemHolder;
 import com.andova.ocv.CarouselOptions;
@@ -21,10 +22,12 @@ import java.util.List;
 class ImagePlugin implements IOCVCarouselPlugin {
     private RectF mRect;
     private View[] vTest;
+    private ImageView mImageView;
     private CarouselOptions mOptions;
 
-    ImagePlugin(CarouselOptions options) {
+    ImagePlugin(CarouselOptions options, ImageView imageView) {
         mOptions = options;
+        mImageView = imageView;
     }
 
     @Override
@@ -37,7 +40,7 @@ class ImagePlugin implements IOCVCarouselPlugin {
 
     @Override
     public boolean addViewInLayout() {
-        return true;
+        return false;
     }
 
     @Override
@@ -47,6 +50,11 @@ class ImagePlugin implements IOCVCarouselPlugin {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.plugin_image_view, parent, false);
         vTest = new View[]{view};
         return vTest;
+    }
+
+    @Override
+    public void scroll(List<CarouselItemHolder> items) {
+        mImageView.setRotation(items.get(0).getCurrentAngle());
     }
 
     /**

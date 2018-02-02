@@ -774,6 +774,10 @@ public class CarouselView extends CarouselSpinner implements GestureDetector.OnG
 
         setSelectedPositionInt(newPositionOfCurrentItem);
 
+        for (IOCVCarouselPlugin plugin : mCarouselOptions.getPlugins()) {
+            plugin.scroll(mCarouselItems);
+        }
+
         // Clear unused views
         mRecycler.clear();
 
